@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { ChevronDown } from 'lucide-react'
 import { containerVariants, itemVariants } from '@/lib/animations'
 import { Material } from '@/lib/db'
 
@@ -10,6 +11,7 @@ export default function Materials() {
   const [materials, setMaterials] = useState<Material[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -106,22 +108,33 @@ export default function Materials() {
               <motion.div
                 key={material.id}
                 variants={itemVariants}
-                className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 hover-lift cursor-pointer h-full flex flex-col transition-all duration-300"
+                className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 cursor-pointer h-full flex flex-col transition-all duration-300"
+                whileHover={{ y: -8 }}
+                onClick={() => setExpandedId(expandedId === material.id ? null : material.id)}
               >
                 {/* Image Container */}
                 <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900 flex-shrink-0">
-                  <Image
+                  <motion.img
                     src={material.imageUrl}
                     alt={material.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
 
                   {/* Category Badge */}
-                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 px-3 sm:px-4 py-1 sm:py-2 bg-orange-500/80 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-white">
+                  <motion.div 
+                    className="absolute top-3 sm:top-4 right-3 sm:right-4 px-3 sm:px-4 py-1 sm:py-2 bg-orange-500/80 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-white"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     {material.category}
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -134,35 +147,98 @@ export default function Materials() {
                     {material.description}
                   </p>
 
-                  {/* Key Features */}
-                  <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 text-xs sm:text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Durability:</span>
-                      <span className="text-orange-400 font-medium">{material.durability}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Cost:</span>
-                      <span className="text-orange-400 font-medium">{material.cost}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Maintenance:</span>
-                      <span className="text-orange-400 font-medium">{material.maintenance}</span>
-                    </div>
-                  </div>
+                  {/* Details Toggle Button */}
+                  <motion.button
+                    className="flex items-center justify-between w-full mb-4 p-2 sm:p-3 rounded-lg bg-white/5 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/50 transition-all duration-300"
+                    whileHover={{ backgroundColor: 'rgba(255, 140, 66, 0.1)' }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-white">
+                      {expandedId === material.id ? 'Hide Details' : 'View Details'}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: expandedId === material.id ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-orange-400" />
+                    </motion.div>
+                  </motion.button>
 
-                  {/* Features Tags */}
-                  {material.features && material.features.length > 0 && (
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      {material.features.slice(0, 3).map((feature, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 border border-white/20 text-white text-xs rounded-full hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  {/* Expandable Details */}
+                  <AnimatePresence>
+                    {expandedId === material.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 text-xs sm:text-sm p-3 sm:p-4 rounded-lg bg-white/5 border border-white/10">
+                          {/* Key Specs */}
+                          <motion.div 
+                            className="flex justify-between"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.05 }}
+                          >
+                            <span className="text-gray-400">Durability:</span>
+                            <span className="text-orange-400 font-medium">{material.durability}</span>
+                          </motion.div>
+                          <motion.div 
+                            className="flex justify-between"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <span className="text-gray-400">Cost:</span>
+                            <span className="text-orange-400 font-medium">{material.cost}</span>
+                          </motion.div>
+                          <motion.div 
+                            className="flex justify-between"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.15 }}
+                          >
+                            <span className="text-gray-400">Maintenance:</span>
+                            <span className="text-orange-400 font-medium">{material.maintenance}</span>
+                          </motion.div>
+                          <motion.div 
+                            className="flex justify-between"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <span className="text-gray-400">Applications:</span>
+                            <span className="text-orange-400 font-medium text-right text-xs">{material.applications}</span>
+                          </motion.div>
+                        </div>
+
+                        {/* Features Tags */}
+                        {material.features && material.features.length > 0 && (
+                          <motion.div 
+                            className="flex flex-wrap gap-1 sm:gap-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.25 }}
+                          >
+                            {material.features.map((feature, idx) => (
+                              <motion.span
+                                key={idx}
+                                className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 border border-white/20 text-white text-xs rounded-full hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.25 + idx * 0.05 }}
+                                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 140, 66, 0.2)' }}
+                              >
+                                {feature}
+                              </motion.span>
+                            ))}
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             ))}
