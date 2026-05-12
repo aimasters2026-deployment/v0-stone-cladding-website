@@ -6,6 +6,7 @@ const MESSAGES_FILE = path.join(DB_DIR, 'messages.json')
 const CONFIG_FILE = path.join(DB_DIR, 'config.json')
 const MEDIA_FILE = path.join(DB_DIR, 'media.json')
 const MATERIALS_FILE = path.join(DB_DIR, 'materials.json')
+const CONSULTATION_CONFIG_FILE = path.join(DB_DIR, 'consultation-config.json')
 
 // Ensure data directory exists
 if (!fs.existsSync(DB_DIR)) {
@@ -71,6 +72,31 @@ export interface Material {
   imageUrl: string
   features: string[]
   createdAt: string
+}
+
+export interface ConsultationChannel {
+  id: string
+  type: 'phone' | 'email' | 'gmail' | 'whatsapp' | 'telegram'
+  label: string
+  value: string // phone number, email, username, etc.
+  enabled: boolean
+  icon?: string // icon name for UI
+}
+
+export interface ConsultationConfig {
+  id: string
+  title: string
+  subtitle: string
+  channels: ConsultationChannel[]
+  backgroundColor: string // hex color
+  accentColor: string // hex color
+  buttonColor: string // hex color
+  buttonTextColor: string // hex color
+  animationDuration: number // ms
+  animationEnabled: boolean
+  closeOnBackdropClick: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 // Initialize default config if not exists
@@ -141,11 +167,71 @@ function initializeMaterials() {
   }
 }
 
+// Initialize default consultation config
+function initializeConsultationConfig() {
+  if (fs.existsSync(CONSULTATION_CONFIG_FILE)) {
+    return JSON.parse(fs.readFileSync(CONSULTATION_CONFIG_FILE, 'utf-8'))
+  }
+
+  const defaultConfig: ConsultationConfig = {
+    id: '1',
+    title: 'Get In Touch',
+    subtitle: 'Choose your preferred contact method',
+    channels: [
+      {
+        id: '1',
+        type: 'phone',
+        label: 'Call Us',
+        value: '+234701234567',
+        enabled: true,
+        icon: 'Phone',
+      },
+      {
+        id: '2',
+        type: 'email',
+        label: 'Email',
+        value: 'info@octo21st.com',
+        enabled: true,
+        icon: 'Mail',
+      },
+      {
+        id: '3',
+        type: 'whatsapp',
+        label: 'WhatsApp',
+        value: '+234701234567',
+        enabled: true,
+        icon: 'MessageCircle',
+      },
+      {
+        id: '4',
+        type: 'telegram',
+        label: 'Telegram',
+        value: '@octo21st',
+        enabled: true,
+        icon: 'Send',
+      },
+    ],
+    backgroundColor: 'rgba(10, 10, 10, 0.95)',
+    accentColor: '#ff8c42',
+    buttonColor: '#ff8c42',
+    buttonTextColor: '#ffffff',
+    animationDuration: 300,
+    animationEnabled: true,
+    closeOnBackdropClick: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }
+
+  fs.writeFileSync(CONSULTATION_CONFIG_FILE, JSON.stringify(defaultConfig, null, 2))
+  return defaultConfig
+}
+
 // Ensure files exist
 initializeConfig()
 initializeMessages()
 initializeMedia()
 initializeMaterials()
+initializeConsultationConfig()
 
 // Read functions
 export function getMessages(): Message[] {
@@ -309,4 +395,29 @@ export function deleteMaterial(id: string): boolean {
     return true
   }
   return false
+}
+
+export function getConsultationConfig(): ConsultationConfig {
+  try {
+    return JSON.parse(fs.readFileSync(CONSULTATION_CONFIG_FILE, 'utf-8'))
+  } catch {
+    return initializeConsultationConfig()
+  }
+}
+
+export function saveConsultationConfig(config: ConsultationConfig): void {
+  fs.writeFileSync(CONSULTATION_CONFIG_FILE, JSON.stringify(config, null, 2))
+}
+
+export function updateConsultationConfig(
+  updates: Partial<ConsultationConfig>
+): ConsultationConfig {
+  const config = getConsultationConfig()
+  const updated: ConsultationConfig = {
+    ...config,
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  }
+  saveConsultationConfig(updated)
+  return updated
 }

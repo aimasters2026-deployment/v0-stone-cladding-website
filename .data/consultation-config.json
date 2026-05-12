@@ -1,0 +1,48 @@
+{
+  "id": "1",
+  "title": "Get In Touch",
+  "subtitle": "Choose your preferred contact method",
+  "channels": [
+    {
+      "id": "1",
+      "type": "phone",
+      "label": "Call Us",
+      "value": "+234701234567",
+      "enabled": true,
+      "icon": "Phone"
+    },
+    {
+      "id": "2",
+      "type": "email",
+      "label": "Email",
+      "value": "info@octo21st.com",
+      "enabled": true,
+      "icon": "Mail"
+    },
+    {
+      "id": "3",
+      "type": "whatsapp",
+      "label": "WhatsApp",
+      "value": "+234701234567",
+      "enabled": true,
+      "icon": "MessageCircle"
+    },
+    {
+      "id": "4",
+      "type": "telegram",
+      "label": "Telegram",
+      "value": "@octo21st",
+      "enabled": true,
+      "icon": "Send"
+    }
+  ],
+  "backgroundColor": "rgba(10, 10, 10, 0.95)",
+  "accentColor": "#ff8c42",
+  "buttonColor": "#ff8c42",
+  "buttonTextColor": "#ffffff",
+  "animationDuration": 300,
+  "animationEnabled": true,
+  "closeOnBackdropClick": true,
+  "createdAt": "2026-05-12T17:57:47.821Z",
+  "updatedAt": "2026-05-12T17:57:47.824Z"
+}

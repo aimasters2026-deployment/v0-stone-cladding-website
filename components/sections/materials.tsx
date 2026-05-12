@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ChevronDown } from 'lucide-react'
 import { containerVariants, itemVariants } from '@/lib/animations'
 import { Material } from '@/lib/db'
+import ConsultationButton from '@/components/consultation-button'
 
 export default function Materials() {
   const [materials, setMaterials] = useState<Material[]>([])
@@ -288,16 +289,7 @@ export default function Materials() {
             <p className="text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
               Need help selecting the right material for your project?
             </p>
-            <motion.button 
-              className="inline-block px-6 sm:px-10 py-2.5 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm sm:text-base rounded-lg font-medium shadow-lg shadow-orange-500/30 transition-all duration-300"
-              whileHover={{ 
-                scale: 1.08,
-                boxShadow: '0 20px 40px rgba(255, 140, 66, 0.5)'
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Request Consultation
-            </motion.button>
+            <ConsultationButton size="lg" />
           </motion.div>
         )}
       </div>
