@@ -58,10 +58,16 @@ export default function Materials() {
         </div>
 
         {/* Category Filter - Mobile responsive */}
-        <div className="mb-8 sm:mb-12 overflow-x-auto">
+        <motion.div 
+          className="mb-8 sm:mb-12 overflow-x-auto"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <div className="flex gap-2 sm:gap-3 min-w-min sm:min-w-0 flex-wrap">
-            {categories.map((category) => (
-              <button
+            {categories.map((category, idx) => (
+              <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-all duration-300 whitespace-nowrap ${
@@ -69,36 +75,50 @@ export default function Materials() {
                     ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/50'
                     : 'glass border border-white/10 hover:border-orange-500/50 text-gray-300 hover:text-white'
                 }`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {category}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Materials Grid - Mobile-first responsive */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
             {[...Array(6)].map((_, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="glass rounded-xl border border-white/10 overflow-hidden h-96 animate-pulse"
+                className="glass rounded-lg sm:rounded-xl border border-white/10 overflow-hidden h-64 sm:h-80 animate-pulse"
+                initial={{ opacity: 0.5 }}
+                animate={{ opacity: 1 }}
+                transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.1 }}
               >
-                <div className="h-48 bg-white/5" />
-                <div className="p-4 sm:p-6 space-y-3">
-                  <div className="h-4 bg-white/10 rounded w-3/4" />
-                  <div className="h-3 bg-white/10 rounded w-1/2" />
+                <div className="h-40 sm:h-48 bg-gradient-to-r from-white/5 to-white/10" />
+                <div className="p-3 sm:p-4 space-y-2">
+                  <div className="h-3 bg-white/10 rounded w-2/3" />
+                  <div className="h-2.5 bg-white/10 rounded w-1/2" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         ) : filteredMaterials.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400">No materials found in this category.</p>
-          </div>
+          <motion.div 
+            className="text-center py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-gray-400 text-base sm:text-lg">No materials found in this category.</p>
+          </motion.div>
         ) : (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -108,59 +128,70 @@ export default function Materials() {
               <motion.div
                 key={material.id}
                 variants={itemVariants}
-                className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 cursor-pointer h-full flex flex-col transition-all duration-300"
-                whileHover={{ y: -8 }}
+                className="group glass overflow-hidden rounded-lg sm:rounded-xl border border-white/10 cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-orange-500/50"
+                whileHover={{ 
+                  y: -6,
+                  boxShadow: '0 20px 40px rgba(255, 140, 66, 0.2)'
+                }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setExpandedId(expandedId === material.id ? null : material.id)}
               >
-                {/* Image Container */}
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900 flex-shrink-0">
+                {/* Image Container - Optimized for mobile */}
+                <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden bg-gray-900 flex-shrink-0">
                   <motion.img
                     src={material.imageUrl}
                     alt={material.name}
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.15 }}
                     transition={{ duration: 0.5 }}
                   />
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    initial={{ opacity: 0.3 }}
+                    whileHover={{ opacity: 0.9 }}
                     transition={{ duration: 0.3 }}
                   />
 
                   {/* Category Badge */}
                   <motion.div 
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 px-3 sm:px-4 py-1 sm:py-2 bg-orange-500/80 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-white"
-                    whileHover={{ scale: 1.1 }}
+                    className="absolute top-2 sm:top-3 right-2 sm:right-3 px-2.5 sm:px-3 py-1 bg-orange-500/85 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-orange-400/30"
+                    whileHover={{ scale: 1.12, boxShadow: '0 0 20px rgba(255, 140, 66, 0.6)' }}
+                    transition={{ duration: 0.2 }}
                   >
                     {material.category}
                   </motion.div>
                 </div>
 
-                {/* Content */}
-                <div className="p-4 sm:p-6 bg-white/5 flex-1 flex flex-col">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 font-space-grotesk line-clamp-2">
+                {/* Content - Compact on mobile */}
+                <div className="p-3 sm:p-5 bg-white/5 flex-1 flex flex-col">
+                  <motion.h3 
+                    className="text-base sm:text-lg font-bold text-white mb-2 font-space-grotesk line-clamp-2"
+                    whileHover={{ color: '#ff8c42' }}
+                  >
                     {material.name}
-                  </h3>
+                  </motion.h3>
 
-                  <p className="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4 line-clamp-2 flex-1">
+                  <p className="text-gray-300 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 flex-1">
                     {material.description}
                   </p>
 
                   {/* Details Toggle Button */}
                   <motion.button
-                    className="flex items-center justify-between w-full mb-4 p-2 sm:p-3 rounded-lg bg-white/5 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/50 transition-all duration-300"
-                    whileHover={{ backgroundColor: 'rgba(255, 140, 66, 0.1)' }}
-                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center justify-between w-full p-2 rounded-md sm:rounded-lg bg-white/5 border border-white/10 transition-all duration-300 group-hover:border-orange-500/50"
+                    whileHover={{ 
+                      backgroundColor: 'rgba(255, 140, 66, 0.15)',
+                      borderColor: 'rgba(255, 140, 66, 0.5)'
+                    }}
+                    whileTap={{ scale: 0.96 }}
                   >
-                    <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-white">
-                      {expandedId === material.id ? 'Hide Details' : 'View Details'}
+                    <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-orange-400 transition-colors">
+                      {expandedId === material.id ? 'Hide' : 'Details'}
                     </span>
                     <motion.div
                       animate={{ rotate: expandedId === material.id ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-orange-400" />
+                      <ChevronDown className="w-4 h-4 text-orange-400" />
                     </motion.div>
                   </motion.button>
 
@@ -168,68 +199,68 @@ export default function Materials() {
                   <AnimatePresence>
                     {expandedId === material.id && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 text-xs sm:text-sm p-3 sm:p-4 rounded-lg bg-white/5 border border-white/10">
-                          {/* Key Specs */}
+                        {/* Key Specs - Compact layout */}
+                        <div className="space-y-1.5 mb-3 text-xs p-2.5 rounded-md bg-white/5 border border-white/10">
                           <motion.div 
-                            className="flex justify-between"
-                            initial={{ opacity: 0, x: -20 }}
+                            className="flex justify-between gap-2"
+                            initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.05 }}
                           >
-                            <span className="text-gray-400">Durability:</span>
-                            <span className="text-orange-400 font-medium">{material.durability}</span>
+                            <span className="text-gray-400 font-medium">Durability:</span>
+                            <span className="text-orange-400 font-semibold text-right">{material.durability}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between"
-                            initial={{ opacity: 0, x: -20 }}
+                            className="flex justify-between gap-2"
+                            initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 }}
+                            transition={{ delay: 0.08 }}
                           >
-                            <span className="text-gray-400">Cost:</span>
-                            <span className="text-orange-400 font-medium">{material.cost}</span>
+                            <span className="text-gray-400 font-medium">Cost:</span>
+                            <span className="text-orange-400 font-semibold">{material.cost}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between"
-                            initial={{ opacity: 0, x: -20 }}
+                            className="flex justify-between gap-2"
+                            initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.15 }}
+                            transition={{ delay: 0.11 }}
                           >
-                            <span className="text-gray-400">Maintenance:</span>
-                            <span className="text-orange-400 font-medium">{material.maintenance}</span>
+                            <span className="text-gray-400 font-medium">Maintenance:</span>
+                            <span className="text-orange-400 font-semibold">{material.maintenance}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between"
-                            initial={{ opacity: 0, x: -20 }}
+                            className="flex justify-between gap-2"
+                            initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
+                            transition={{ delay: 0.14 }}
                           >
-                            <span className="text-gray-400">Applications:</span>
-                            <span className="text-orange-400 font-medium text-right text-xs">{material.applications}</span>
+                            <span className="text-gray-400 font-medium">Use:</span>
+                            <span className="text-orange-400 font-semibold text-right text-xs leading-tight">{material.applications}</span>
                           </motion.div>
                         </div>
 
-                        {/* Features Tags */}
+                        {/* Features Tags - Optimized for mobile */}
                         {material.features && material.features.length > 0 && (
                           <motion.div 
-                            className="flex flex-wrap gap-1 sm:gap-2"
+                            className="flex flex-wrap gap-1"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 0.25 }}
+                            transition={{ delay: 0.2 }}
                           >
                             {material.features.map((feature, idx) => (
                               <motion.span
                                 key={idx}
-                                className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 border border-white/20 text-white text-xs rounded-full hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300"
-                                initial={{ opacity: 0, scale: 0.8 }}
+                                className="px-2 py-0.5 bg-orange-500/20 border border-orange-500/40 text-orange-100 text-xs rounded-full hover:bg-orange-500/30 transition-all duration-200"
+                                initial={{ opacity: 0, scale: 0.75 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.25 + idx * 0.05 }}
-                                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 140, 66, 0.2)' }}
+                                transition={{ delay: 0.2 + idx * 0.03 }}
+                                whileHover={{ scale: 1.08, backgroundColor: 'rgba(255, 140, 66, 0.35)' }}
                               >
                                 {feature}
                               </motion.span>
@@ -247,14 +278,27 @@ export default function Materials() {
 
         {/* Bottom CTA */}
         {filteredMaterials.length > 0 && (
-          <div className="mt-12 sm:mt-16 text-center">
-            <p className="text-base sm:text-lg text-gray-400 mb-4 sm:mb-6">
+          <motion.div 
+            className="mt-12 sm:mt-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
               Need help selecting the right material for your project?
             </p>
-            <button className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm sm:text-base rounded-lg font-medium hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+            <motion.button 
+              className="inline-block px-6 sm:px-10 py-2.5 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm sm:text-base rounded-lg font-medium shadow-lg shadow-orange-500/30 transition-all duration-300"
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: '0 20px 40px rgba(255, 140, 66, 0.5)'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
               Request Consultation
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         )}
       </div>
     </section>

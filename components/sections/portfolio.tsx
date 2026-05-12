@@ -50,7 +50,7 @@ export default function Portfolio() {
 
         {/* Projects Grid - Responsive */}
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -60,11 +60,15 @@ export default function Portfolio() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 cursor-pointer"
-              whileHover={{ y: -8 }}
+              className="group glass overflow-hidden rounded-lg sm:rounded-xl border border-white/10 cursor-pointer transition-all duration-300 hover:border-orange-500/50"
+              whileHover={{ 
+                y: -6,
+                boxShadow: '0 20px 40px rgba(255, 140, 66, 0.2)'
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              {/* Image Container */}
-              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900">
+              {/* Image Container - Optimized for mobile */}
+              <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden bg-gray-900">
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -73,33 +77,35 @@ export default function Portfolio() {
                   transition={{ duration: 0.5 }}
                 />
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                  initial={{ opacity: 0.3 }}
+                  whileHover={{ opacity: 0.9 }}
                   transition={{ duration: 0.3 }}
                 />
               </div>
 
-              {/* Content */}
+              {/* Content - Compact on mobile */}
               <motion.div 
-                className="p-4 sm:p-6 bg-white/5"
+                className="p-3 sm:p-5 bg-white/5"
                 initial={{ y: 0 }}
                 whileHover={{ y: -2 }}
               >
                 <motion.h3 
-                  className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2 font-space-grotesk line-clamp-2"
-                  whileHover={{ color: '#ea580c' }}
+                  className="text-sm sm:text-base font-bold text-white mb-1.5 font-space-grotesk line-clamp-1 sm:line-clamp-2"
+                  whileHover={{ color: '#ff8c42' }}
+                  transition={{ duration: 0.2 }}
                 >
                   {project.title}
                 </motion.h3>
                 <motion.p 
-                  className="text-xs sm:text-sm text-orange-400 font-medium mb-2 sm:mb-3"
+                  className="text-xs text-orange-400 font-medium mb-2"
                   initial={{ opacity: 0.8 }}
                   whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
                 >
                   {project.location}
                 </motion.p>
-                <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">
+                <p className="text-gray-300 text-xs line-clamp-1 sm:line-clamp-2">
                   {project.description}
                 </p>
               </motion.div>
