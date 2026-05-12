@@ -91,19 +91,19 @@ export default function Materials() {
 
         {/* Materials Grid - Mobile-first responsive */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-3">
             {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
-                className="glass rounded-lg sm:rounded-xl border border-white/10 overflow-hidden h-64 sm:h-80 animate-pulse"
+                className="glass rounded-lg sm:rounded-xl border border-white/10 overflow-hidden h-32 sm:h-40 animate-pulse"
                 initial={{ opacity: 0.5 }}
                 animate={{ opacity: 1 }}
                 transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.1 }}
               >
-                <div className="h-40 sm:h-48 bg-gradient-to-r from-white/5 to-white/10" />
-                <div className="p-3 sm:p-4 space-y-2">
-                  <div className="h-3 bg-white/10 rounded w-2/3" />
-                  <div className="h-2.5 bg-white/10 rounded w-1/2" />
+                <div className="h-20 sm:h-24 bg-gradient-to-r from-white/5 to-white/10" />
+                <div className="p-2 sm:p-2 space-y-2">
+                  <div className="h-2 bg-white/10 rounded w-2/3" />
+                  <div className="h-1.5 bg-white/10 rounded w-1/2" />
                 </div>
               </motion.div>
             ))}
@@ -119,7 +119,7 @@ export default function Materials() {
           </motion.div>
         ) : (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-3"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -131,14 +131,14 @@ export default function Materials() {
                 variants={itemVariants}
                 className="group glass overflow-hidden rounded-lg sm:rounded-xl border border-white/10 cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-orange-500/50"
                 whileHover={{ 
-                  y: -6,
-                  boxShadow: '0 20px 40px rgba(255, 140, 66, 0.2)'
+                  y: -3,
+                  boxShadow: '0 10px 20px rgba(255, 140, 66, 0.15)'
                 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setExpandedId(expandedId === material.id ? null : material.id)}
               >
                 {/* Image Container - Optimized for mobile */}
-                <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden bg-gray-900 flex-shrink-0">
+                <div className="relative h-20 sm:h-24 md:h-28 overflow-hidden bg-gray-900 flex-shrink-0">
                   <motion.img
                     src={material.imageUrl}
                     alt={material.name}
@@ -164,29 +164,29 @@ export default function Materials() {
                 </div>
 
                 {/* Content - Compact on mobile */}
-                <div className="p-3 sm:p-5 bg-white/5 flex-1 flex flex-col">
+                <div className="p-2 sm:p-2.5 bg-white/5 flex-1 flex flex-col">
                   <motion.h3 
-                    className="text-base sm:text-lg font-bold text-white mb-2 font-space-grotesk line-clamp-2"
+                    className="text-sm sm:text-base font-bold text-white mb-1 font-space-grotesk line-clamp-1"
                     whileHover={{ color: '#ff8c42' }}
                   >
                     {material.name}
                   </motion.h3>
 
-                  <p className="text-gray-300 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 flex-1">
+                  <p className="text-gray-300 text-xs line-clamp-1 flex-1">
                     {material.description}
                   </p>
 
                   {/* Details Toggle Button */}
                   <motion.button
-                    className="flex items-center justify-between w-full p-2 rounded-md sm:rounded-lg bg-white/5 border border-white/10 transition-all duration-300 group-hover:border-orange-500/50"
+                    className="flex items-center justify-between w-full p-1.5 rounded-md text-xs mt-1 bg-white/5 border border-white/10 transition-all duration-300 group-hover:border-orange-500/50"
                     whileHover={{ 
                       backgroundColor: 'rgba(255, 140, 66, 0.15)',
                       borderColor: 'rgba(255, 140, 66, 0.5)'
                     }}
                     whileTap={{ scale: 0.96 }}
                   >
-                    <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-orange-400 transition-colors">
-                      {expandedId === material.id ? 'Hide' : 'Details'}
+                    <span className="font-medium text-gray-300 group-hover:text-orange-400 transition-colors">
+                      {expandedId === material.id ? 'Hide' : 'Info'}
                     </span>
                     <motion.div
                       animate={{ rotate: expandedId === material.id ? 180 : 0 }}
@@ -201,67 +201,67 @@ export default function Materials() {
                     {expandedId === material.id && (
                       <motion.div
                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 4 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
                         {/* Key Specs - Compact layout */}
-                        <div className="space-y-1.5 mb-3 text-xs p-2.5 rounded-md bg-white/5 border border-white/10">
+                        <div className="space-y-0.5 mb-2 text-xs p-1.5 rounded-md bg-white/5 border border-white/10">
                           <motion.div 
-                            className="flex justify-between gap-2"
+                            className="flex justify-between gap-1"
                             initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.05 }}
                           >
-                            <span className="text-gray-400 font-medium">Durability:</span>
-                            <span className="text-orange-400 font-semibold text-right">{material.durability}</span>
+                            <span className="text-gray-400 font-medium text-xs">Durability:</span>
+                            <span className="text-orange-400 font-semibold text-xs text-right">{material.durability}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between gap-2"
+                            className="flex justify-between gap-1"
                             initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.08 }}
                           >
-                            <span className="text-gray-400 font-medium">Cost:</span>
-                            <span className="text-orange-400 font-semibold">{material.cost}</span>
+                            <span className="text-gray-400 font-medium text-xs">Cost:</span>
+                            <span className="text-orange-400 font-semibold text-xs">{material.cost}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between gap-2"
+                            className="flex justify-between gap-1"
                             initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.11 }}
                           >
-                            <span className="text-gray-400 font-medium">Maintenance:</span>
-                            <span className="text-orange-400 font-semibold">{material.maintenance}</span>
+                            <span className="text-gray-400 font-medium text-xs">Maint:</span>
+                            <span className="text-orange-400 font-semibold text-xs">{material.maintenance}</span>
                           </motion.div>
                           <motion.div 
-                            className="flex justify-between gap-2"
+                            className="flex justify-between gap-1"
                             initial={{ opacity: 0, x: -15 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.14 }}
                           >
-                            <span className="text-gray-400 font-medium">Use:</span>
-                            <span className="text-orange-400 font-semibold text-right text-xs leading-tight">{material.applications}</span>
+                            <span className="text-gray-400 font-medium text-xs">Use:</span>
+                            <span className="text-orange-400 font-semibold text-xs text-right leading-tight">{material.applications}</span>
                           </motion.div>
                         </div>
 
                         {/* Features Tags - Optimized for mobile */}
                         {material.features && material.features.length > 0 && (
                           <motion.div 
-                            className="flex flex-wrap gap-1"
+                            className="flex flex-wrap gap-0.5"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                           >
-                            {material.features.map((feature, idx) => (
+                            {material.features.slice(0, 2).map((feature, idx) => (
                               <motion.span
                                 key={idx}
-                                className="px-2 py-0.5 bg-orange-500/20 border border-orange-500/40 text-orange-100 text-xs rounded-full hover:bg-orange-500/30 transition-all duration-200"
+                                className="px-1.5 py-0.5 bg-orange-500/20 border border-orange-500/40 text-orange-100 text-xs rounded-full hover:bg-orange-500/30 transition-all duration-200"
                                 initial={{ opacity: 0, scale: 0.75 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.2 + idx * 0.03 }}
-                                whileHover={{ scale: 1.08, backgroundColor: 'rgba(255, 140, 66, 0.35)' }}
+                                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 140, 66, 0.35)' }}
                               >
                                 {feature}
                               </motion.span>
