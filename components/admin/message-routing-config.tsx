@@ -10,7 +10,7 @@ interface MessageRoutingConfigProps {
   adminKey: string
 }
 
-export default function MessageRoutingConfig({ adminKey }: MessageRoutingConfigProps) {
+export function MessageRoutingConfig({ adminKey }: MessageRoutingConfigProps) {
   const [config, setConfig] = useState<MessageConfig | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)

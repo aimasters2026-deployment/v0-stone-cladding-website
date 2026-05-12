@@ -1,3 +1,6 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import {
   BarChart3,
   Hammer,
@@ -6,6 +9,7 @@ import {
   ShieldCheck,
   Wrench,
 } from 'lucide-react'
+import { containerVariants, itemVariants } from '@/lib/animations'
 
 const services = [
   {
@@ -48,22 +52,35 @@ export default function Services() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-12 sm:mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 font-space-grotesk">
             Our <span className="gradient-text">Services</span>
           </h2>
           <p className="text-base sm:text-lg text-gray-400 max-w-2xl">
             Comprehensive stone cladding solutions from concept to completion, backed by expertise and international partnerships.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid - Responsive */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+        >
           {services.map((service, index) => {
             const Icon = service.icon
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={itemVariants}
                 className="group glass hover-lift p-4 sm:p-6 lg:p-8 rounded-lg sm:rounded-xl border border-white/10 hover:border-orange-500/50 relative overflow-hidden transition-all duration-300"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
@@ -78,10 +95,10 @@ export default function Services() {
                     {service.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

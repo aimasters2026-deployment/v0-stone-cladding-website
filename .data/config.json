@@ -1,0 +1,36 @@
+{
+  "messageTypes": {
+    "consultation": {
+      "label": "Consultation Request",
+      "description": "Request a consultation with our team",
+      "destinations": [],
+      "enabled": true
+    },
+    "project": {
+      "label": "Project Inquiry",
+      "description": "Discuss your upcoming project",
+      "destinations": [],
+      "enabled": true
+    },
+    "support": {
+      "label": "Support Request",
+      "description": "Request technical support",
+      "destinations": [],
+      "enabled": true
+    },
+    "material": {
+      "label": "Material Inquiry",
+      "description": "Ask about our stone materials",
+      "destinations": [],
+      "enabled": true
+    },
+    "partnership": {
+      "label": "Partnership Proposal",
+      "description": "Propose a partnership opportunity",
+      "destinations": [],
+      "enabled": true
+    }
+  },
+  "adminEmails": [],
+  "webhooks": {}
+}

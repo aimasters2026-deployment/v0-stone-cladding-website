@@ -60,7 +60,7 @@ export default function Footer() {
             <h4 className="font-bold mb-4 text-sm uppercase tracking-wide">Company</h4>
             <ul className="space-y-2 text-sm opacity-90">
               <li>
-                <Link href="#about" className="hover:opacity-100 transition-opacity">
+                <Link href="/about" className="hover:opacity-100 transition-opacity">
                   About Us
                 </Link>
               </li>
@@ -75,8 +75,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:opacity-100 transition-opacity">
+                <Link href="/legal/privacy" className="hover:opacity-100 transition-opacity">
                   Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/terms" className="hover:opacity-100 transition-opacity">
+                  Terms of Service
                 </Link>
               </li>
             </ul>
@@ -113,21 +118,27 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 hover:bg-primary-foreground/10 rounded transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 hover:bg-primary-foreground/10 rounded transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 hover:bg-primary-foreground/10 rounded transition-colors"
                 aria-label="LinkedIn"
               >

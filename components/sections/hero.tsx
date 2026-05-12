@@ -1,6 +1,10 @@
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { containerVariants, itemVariants } from '@/lib/animations'
 
 export default function Hero() {
   return (
@@ -25,19 +29,24 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32"
+      >
         <div className="space-y-8 max-w-3xl">
-          <div className="space-y-4 md:space-y-6">
+          <motion.div variants={itemVariants} className="space-y-4 md:space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-tight font-space-grotesk">
               <span className="gradient-text">Premium Stone Wall</span> <span className="text-white">Cladding Excellence</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl text-balance leading-relaxed">
               Transform your building facade with premium Turkish stone materials. Expert consulting, design, and installation for sustainable, energy-efficient structures.
             </p>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 pt-4 md:pt-6">
+          <motion.div variants={itemVariants} className="flex flex-col xs:flex-row gap-3 sm:gap-4 pt-4 md:pt-6">
             <Button
               asChild
               size="lg"
@@ -55,10 +64,10 @@ export default function Hero() {
             >
               <Link href="#portfolio" className="flex items-center justify-center">View Our Work</Link>
             </Button>
-          </div>
+          </motion.div>
 
           {/* Trust Badge - Responsive Grid */}
-          <div className="pt-8 md:pt-12 border-t border-white/10">
+          <motion.div variants={itemVariants} className="pt-8 md:pt-12 border-t border-white/10">
             <p className="text-xs sm:text-sm text-gray-400 font-medium mb-4 md:mb-6">
               Trusted by leading developers and architects across Africa
             </p>
@@ -76,9 +85,9 @@ export default function Hero() {
                 <p className="text-xs sm:text-sm text-gray-400 mt-1 md:mt-2">Locations</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

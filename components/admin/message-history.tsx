@@ -9,7 +9,7 @@ interface MessageHistoryProps {
   adminKey: string
 }
 
-export default function MessageHistory({ adminKey }: MessageHistoryProps) {
+export function MessageHistory({ adminKey }: MessageHistoryProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null)

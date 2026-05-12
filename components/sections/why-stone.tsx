@@ -1,12 +1,18 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import {
-  Droplet,
   Zap,
-  Wind,
   Shield,
+  Lightbulb,
+  TrendingUp,
+  Droplet,
+  Wind,
   Leaf,
   Layers,
 } from 'lucide-react'
+import { containerVariants, itemVariants } from '@/lib/animations'
 
 const benefits = [
   {

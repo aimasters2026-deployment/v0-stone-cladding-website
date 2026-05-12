@@ -11,7 +11,7 @@ interface MediaManagementProps {
   adminKey: string
 }
 
-export default function MediaManagement({ adminKey }: MediaManagementProps) {
+export function MediaManagement({ adminKey }: MediaManagementProps) {
   const [media, setMedia] = useState<MediaAsset[]>([])
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)

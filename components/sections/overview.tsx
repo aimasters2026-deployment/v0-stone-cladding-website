@@ -1,4 +1,8 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { slideInLeftVariants, slideInRightVariants, containerVariants, itemVariants } from '@/lib/animations'
 
 export default function Overview() {
   return (
@@ -8,19 +12,31 @@ export default function Overview() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16 max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-12 sm:mb-16 max-w-2xl"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 font-space-grotesk">
             <span className="gradient-text">Simplifying</span> Wall Cladding
           </h2>
           <p className="text-base sm:text-lg text-gray-400">
             At Octo 21st Stone Technology, we combine expertise with premium materials to deliver exceptional stone wall cladding solutions that enhance building performance and aesthetics.
           </p>
-        </div>
+        </motion.div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center"
+        >
           {/* Image */}
-          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] group">
+          <motion.div variants={itemVariants} className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] group">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/modern_building_rainscreen.jpg%20-%20Copy-cZoiVF0UwkzNB3iqa4HjWcLI3XYpE2.png"
               alt="Modern building installation"
@@ -28,10 +44,10 @@ export default function Overview() {
               className="object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 glass rounded-xl border border-white/10" />
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div className="space-y-6 sm:space-y-8">
+          <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 font-space-grotesk">Our Expertise</h3>
               <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
@@ -68,8 +84,8 @@ export default function Overview() {
                 <span className="font-bold text-white">In Partnership with Neksan</span> - Providing access to premium Turkish stone materials and international standards.
               </p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )

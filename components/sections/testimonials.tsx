@@ -1,4 +1,8 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
+import { containerVariants, itemVariants } from '@/lib/animations'
 
 const testimonials = [
   {
