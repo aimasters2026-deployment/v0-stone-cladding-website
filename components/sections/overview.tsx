@@ -6,21 +6,21 @@ export default function Overview() {
       {/* Background gradient */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-red-500/10 via-transparent to-transparent blur-3xl" />
       
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="mb-16 max-w-2xl">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 font-space-grotesk">
+        <div className="mb-12 sm:mb-16 max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 font-space-grotesk">
             <span className="gradient-text">Simplifying</span> Wall Cladding
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-base sm:text-lg text-gray-400">
             At Octo 21st Stone Technology, we combine expertise with premium materials to deliver exceptional stone wall cladding solutions that enhance building performance and aesthetics.
           </p>
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* Image */}
-          <div className="relative h-96 sm:h-[500px] group">
+          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] group">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/modern_building_rainscreen.jpg%20-%20Copy-cZoiVF0UwkzNB3iqa4HjWcLI3XYpE2.png"
               alt="Modern building installation"
@@ -31,20 +31,20 @@ export default function Overview() {
           </div>
 
           {/* Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-3 font-space-grotesk">Our Expertise</h3>
-              <p className="text-gray-400 leading-relaxed">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 font-space-grotesk">Our Expertise</h3>
+              <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
                 With partnerships in Turkey and working with international partners like Neksan, we provide world-class stone cladding solutions tailored to your architectural vision and building requirements.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div>
-                <h4 className="font-bold text-white mb-2">Complete Service Offering</h4>
-                <ul className="space-y-2 text-gray-400">
+                <h4 className="font-bold text-white mb-2 text-sm sm:text-base">Complete Service Offering</h4>
+                <ul className="space-y-1.5 sm:space-y-2 text-gray-400 text-sm sm:text-base">
                   <li className="flex items-start gap-3">
-                    <span className="text-orange-400 font-bold">•</span>
+                    <span className="text-orange-400 font-bold mt-0.5">•</span>
                     <span>Professional consulting and facade design</span>
                   </li>
                   <li className="flex items-start gap-3">

@@ -1,44 +1,49 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
-      {/* Background Image with Mesh Gradient */}
+      {/* Background Video with Tint Overlay */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        preload="auto"
+      >
+        <source src="/hero-background.mp4" type="video/mp4" />
+      </video>
+
+      {/* Gradient Tint Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/engineered_facade_detail.jpg%20-%20Copy%20-%20Copy-jH7bCc3bqM5kAWesV9qFSb5Iddv423.png"
-          alt="Stone facade background"
-          fill
-          className="object-cover opacity-15"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-orange-500/20 via-transparent to-transparent blur-3xl opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-[#0a0a0a]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a]" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-orange-500/15 via-transparent to-transparent blur-3xl opacity-60" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center sm:text-left">
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-balance leading-tight font-space-grotesk">
-              <span className="gradient-text">Premium Stone Wall</span> Cladding Excellence
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+        <div className="space-y-8 max-w-3xl">
+          <div className="space-y-4 md:space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-tight font-space-grotesk">
+              <span className="gradient-text">Premium Stone Wall</span> <span className="text-white">Cladding Excellence</span>
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl text-balance">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl text-balance leading-relaxed">
               Transform your building facade with premium Turkish stone materials. Expert consulting, design, and installation for sustainable, energy-efficient structures.
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 pt-4 md:pt-6">
             <Button
               asChild
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 w-full xs:w-auto transform hover:scale-105"
             >
-              <Link href="#contact" className="flex items-center gap-2">
+              <Link href="#contact" className="flex items-center justify-center gap-2">
                 Start Your Project
                 <ArrowRight className="h-5 w-5" />
               </Link>
@@ -46,28 +51,29 @@ export default function Hero() {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary/10"
+              className="glass border-white/20 text-white hover:border-orange-500/50 hover:bg-white/10 transition-all duration-300 w-full xs:w-auto"
             >
-              <Link href="#portfolio">View Our Work</Link>
+              <Link href="#portfolio" className="flex items-center justify-center">View Our Work</Link>
             </Button>
           </div>
 
-          {/* Trust Badge */}
-          <div className="pt-8 border-t border-border">
-            <p className="text-sm text-muted-foreground font-medium mb-3">Trusted by leading developers and architects across Africa</p>
-            <div className="flex flex-wrap gap-6 items-center">
-              <div>
-                <p className="text-2xl font-bold text-foreground">50+</p>
-                <p className="text-xs text-muted-foreground">Projects Completed</p>
+          {/* Trust Badge - Responsive Grid */}
+          <div className="pt-8 md:pt-12 border-t border-white/10">
+            <p className="text-xs sm:text-sm text-gray-400 font-medium mb-4 md:mb-6">
+              Trusted by leading developers and architects across Africa
+            </p>
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:flex md:flex-wrap">
+              <div className="glass-sm p-3 sm:p-4 rounded-lg border border-white/10">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">50+</p>
+                <p className="text-xs sm:text-sm text-gray-400 mt-1 md:mt-2">Projects</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">15+</p>
-                <p className="text-xs text-muted-foreground">Years Experience</p>
+              <div className="glass-sm p-3 sm:p-4 rounded-lg border border-white/10">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">15+</p>
+                <p className="text-xs sm:text-sm text-gray-400 mt-1 md:mt-2">Years</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">3</p>
-                <p className="text-xs text-muted-foreground">Office Locations</p>
+              <div className="glass-sm p-3 sm:p-4 rounded-lg border border-white/10">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">3</p>
+                <p className="text-xs sm:text-sm text-gray-400 mt-1 md:mt-2">Locations</p>
               </div>
             </div>
           </div>

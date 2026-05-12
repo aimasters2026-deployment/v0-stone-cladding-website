@@ -27,26 +27,26 @@ export default function Portfolio() {
       {/* Background gradient */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-green-500/10 via-transparent to-transparent blur-3xl" />
       
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-space-grotesk">
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 font-space-grotesk">
             Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl">
+          <p className="text-base sm:text-lg text-gray-400 max-w-2xl">
             A selection of our most prestigious stone cladding installations across Africa and international markets.
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Projects Grid - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
               className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 hover-lift cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative h-64 overflow-hidden bg-gray-900">
+              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -57,14 +57,14 @@ export default function Portfolio() {
               </div>
 
               {/* Content */}
-              <div className="p-6 bg-white/5">
-                <h3 className="text-lg font-bold text-white mb-2 font-space-grotesk">
+              <div className="p-4 sm:p-6 bg-white/5">
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2 font-space-grotesk line-clamp-2">
                   {project.title}
                 </h3>
-                <p className="text-sm text-orange-400 font-medium mb-3">
+                <p className="text-xs sm:text-sm text-orange-400 font-medium mb-2 sm:mb-3">
                   {project.location}
                 </p>
-                <p className="text-gray-300 text-sm">
+                <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">
                   {project.description}
                 </p>
               </div>
@@ -73,11 +73,11 @@ export default function Portfolio() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-lg text-gray-400 mb-6">
+        <div className="mt-12 sm:mt-16 text-center">
+          <p className="text-base sm:text-lg text-gray-400 mb-4 sm:mb-6">
             See more of our completed projects and case studies
           </p>
-          <button className="inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+          <button className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm sm:text-base rounded-lg font-medium hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
             View All Projects
           </button>
         </div>
