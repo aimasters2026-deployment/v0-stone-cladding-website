@@ -5,25 +5,26 @@ import { ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Background Image */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      {/* Background Image with Mesh Gradient */}
       <div className="absolute inset-0 z-0">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/engineered_facade_detail.jpg%20-%20Copy%20-%20Copy-jH7bCc3bqM5kAWesV9qFSb5Iddv423.png"
           alt="Stone facade background"
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-15"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-orange-500/20 via-transparent to-transparent blur-3xl opacity-50" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center sm:text-left">
         <div className="space-y-6">
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground text-balance leading-tight">
-              Premium Stone Wall Cladding Excellence
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-balance leading-tight font-space-grotesk">
+              <span className="gradient-text">Premium Stone Wall</span> Cladding Excellence
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl text-balance">
               Transform your building facade with premium Turkish stone materials. Expert consulting, design, and installation for sustainable, energy-efficient structures.

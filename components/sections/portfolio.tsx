@@ -23,14 +23,17 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-20 sm:py-28 bg-card">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="portfolio" className="py-20 sm:py-28 bg-[#0a0a0a] relative">
+      {/* Background gradient */}
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-green-500/10 via-transparent to-transparent blur-3xl" />
+      
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
         {/* Section Header */}
         <div className="mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Featured Projects
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-space-grotesk">
+            Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-lg text-gray-400 max-w-2xl">
             A selection of our most prestigious stone cladding installations across Africa and international markets.
           </p>
         </div>
@@ -40,27 +43,28 @@ export default function Portfolio() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group overflow-hidden rounded-lg border border-border hover:border-primary transition-all duration-300"
+              className="group glass overflow-hidden rounded-xl border border-white/10 hover:border-orange-500/50 hover-lift cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative h-64 overflow-hidden bg-muted">
+              <div className="relative h-64 overflow-hidden bg-gray-900">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Content */}
-              <div className="p-6 bg-background">
-                <h3 className="text-lg font-bold text-foreground mb-2">
+              <div className="p-6 bg-white/5">
+                <h3 className="text-lg font-bold text-white mb-2 font-space-grotesk">
                   {project.title}
                 </h3>
-                <p className="text-sm text-accent font-medium mb-3">
+                <p className="text-sm text-orange-400 font-medium mb-3">
                   {project.location}
                 </p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-gray-300 text-sm">
                   {project.description}
                 </p>
               </div>
@@ -70,10 +74,10 @@ export default function Portfolio() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-lg text-gray-400 mb-6">
             See more of our completed projects and case studies
           </p>
-          <button className="inline-block px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <button className="inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
             View All Projects
           </button>
         </div>

@@ -57,14 +57,17 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-card">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="contact" className="py-20 sm:py-28 bg-[#0a0a0a] relative">
+      {/* Background gradient */}
+      <div className="absolute top-1/2 left-0 w-[700px] h-[700px] bg-gradient-to-r from-orange-500/10 via-transparent to-transparent blur-3xl -translate-y-1/2" />
+      
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
         {/* Section Header */}
         <div className="mb-16 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Get In Touch
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-space-grotesk">
+            Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Let&apos;s discuss your stone cladding project and how we can bring your architectural vision to life.
           </p>
         </div>
@@ -75,16 +78,16 @@ export default function Contact() {
             {contactInfo.map((info, index) => {
               const Icon = info.icon
               return (
-                <div key={index}>
+                <div key={index} className="glass p-6 rounded-xl border border-white/10 hover:border-orange-500/50 hover-lift">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 bg-accent/10 rounded-lg">
-                      <Icon className="h-5 w-5 text-accent" />
+                    <div className="p-2 bg-gradient-to-br from-orange-500/20 to-orange-400/10 rounded-lg border border-orange-500/20">
+                      <Icon className="h-5 w-5 text-orange-400" />
                     </div>
-                    <h3 className="font-bold text-foreground">{info.title}</h3>
+                    <h3 className="font-bold text-white font-space-grotesk">{info.title}</h3>
                   </div>
                   <div className="ml-11 space-y-1">
                     {info.details.map((detail, i) => (
-                      <p key={i} className="text-muted-foreground text-sm">
+                      <p key={i} className="text-gray-400 text-sm">
                         {detail}
                       </p>
                     ))}
@@ -96,10 +99,10 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-6 bg-background p-8 rounded-lg border border-border">
+            <form onSubmit={handleSubmit} className="space-y-6 glass p-8 rounded-xl border border-white/10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                     Full Name
                   </label>
                   <Input
@@ -109,10 +112,11 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
+                    className="glass-sm bg-white/10 border-white/20 text-white placeholder:text-gray-500"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                     Email
                   </label>
                   <Input
@@ -123,13 +127,14 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="your@email.com"
                     required
+                    className="glass-sm bg-white/10 border-white/20 text-white placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
                     Phone Number
                   </label>
                   <Input
@@ -138,10 +143,11 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+234 ..."
+                    className="glass-sm bg-white/10 border-white/20 text-white placeholder:text-gray-500"
                   />
                 </div>
                 <div>
-                  <label htmlFor="project" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="project" className="block text-sm font-medium text-white mb-2">
                     Project Type
                   </label>
                   <Input
@@ -150,12 +156,13 @@ export default function Contact() {
                     value={formData.project}
                     onChange={handleChange}
                     placeholder="Residential, Commercial, etc."
+                    className="glass-sm bg-white/10 border-white/20 text-white placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
                   Project Details
                 </label>
                 <Textarea
@@ -165,17 +172,18 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Tell us about your project requirements..."
                   rows={5}
+                  className="glass-sm bg-white/10 border-white/20 text-white placeholder:text-gray-500"
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 font-space-grotesk"
               >
                 {submitted ? '✓ Message Sent!' : 'Send Consultation Request'}
               </Button>
 
-              <p className="text-xs text-muted-foreground text-center">
+              <p className="text-xs text-gray-400 text-center">
                 We&apos;ll respond within 24 hours during business days
               </p>
             </form>

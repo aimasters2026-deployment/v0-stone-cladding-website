@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-[#0f0f0f] glass border-t border-white/10 text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}

@@ -120,6 +120,42 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0a0a0a] text-foreground;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-lg;
+  }
+
+  .glass-sm {
+    @apply backdrop-blur-sm bg-white/5 border border-white/10 rounded-md;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-400 via-red-400 to-green-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, #0a0a0a, #0a0a0a) padding-box,
+                linear-gradient(135deg, #ff8c42, #22c55e) border-box;
+    border: 1px solid transparent;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  .cursor-glow {
+    pointer-events: none;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 140, 66, 0.15) 0%, rgba(255, 140, 66, 0) 70%);
+    filter: blur(40px);
+    z-index: -1;
   }
 }

@@ -42,12 +42,17 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 sm:py-28 bg-card">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="services" className="py-20 sm:py-28 bg-[#0a0a0a] relative">
+      {/* Background gradient */}
+      <div className="absolute top-0 left-1/2 w-[800px] h-[400px] bg-gradient-to-br from-orange-500/10 via-transparent to-transparent blur-3xl -translate-x-1/2" />
+      
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
         {/* Section Header */}
         <div className="mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Our Services</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-space-grotesk">
+            Our <span className="gradient-text">Services</span>
+          </h2>
+          <p className="text-lg text-gray-400 max-w-2xl">
             Comprehensive stone cladding solutions from concept to completion, backed by expertise and international partnerships.
           </p>
         </div>
@@ -59,17 +64,20 @@ export default function Services() {
             return (
               <div
                 key={index}
-                className="group p-8 bg-background rounded-lg border border-border hover:border-primary hover:shadow-lg transition-all duration-300"
+                className="group glass hover-lift p-8 rounded-xl border border-white/10 hover:border-orange-500/50 relative overflow-hidden"
               >
-                <div className="mb-4 inline-block p-3 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                  <Icon className="h-6 w-6 text-accent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="relative z-10">
+                  <div className="mb-4 inline-block p-3 bg-gradient-to-br from-orange-500/20 to-orange-400/10 rounded-lg group-hover:from-orange-500/30 group-hover:to-orange-400/20 transition-colors border border-orange-500/20">
+                    <Icon className="h-6 w-6 text-orange-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 font-space-grotesk">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
               </div>
             )
           })}
