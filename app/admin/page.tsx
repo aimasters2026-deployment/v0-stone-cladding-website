@@ -5,10 +5,11 @@ import AdminNav from '@/components/admin-nav'
 import { MessageRoutingConfig } from '@/components/admin/message-routing-config'
 import { MediaManagement } from '@/components/admin/media-management'
 import { MessageHistory } from '@/components/admin/message-history'
+import { MaterialsManagement } from '@/components/admin/materials-management'
 import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
 
-type Tab = 'routing' | 'messages' | 'media'
+type Tab = 'routing' | 'messages' | 'media' | 'materials'
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>('routing')
@@ -134,6 +135,9 @@ export default function AdminDashboard() {
           )}
           {activeTab === 'media' && (
             <MediaManagement adminKey={adminKey} />
+          )}
+          {activeTab === 'materials' && (
+            <MaterialsManagement adminKey={adminKey} />
           )}
         </div>
       </div>

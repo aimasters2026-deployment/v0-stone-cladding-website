@@ -5,6 +5,7 @@ const DB_DIR = path.join(process.cwd(), '.data')
 const MESSAGES_FILE = path.join(DB_DIR, 'messages.json')
 const CONFIG_FILE = path.join(DB_DIR, 'config.json')
 const MEDIA_FILE = path.join(DB_DIR, 'media.json')
+const MATERIALS_FILE = path.join(DB_DIR, 'materials.json')
 
 // Ensure data directory exists
 if (!fs.existsSync(DB_DIR)) {
@@ -56,6 +57,20 @@ export interface MediaAsset {
   size: number
   uploadedAt: string
   metadata?: Record<string, any>
+}
+
+export interface Material {
+  id: string
+  name: string
+  category: string
+  description: string
+  durability: string
+  cost: string
+  maintenance: string
+  applications: string
+  imageUrl: string
+  features: string[]
+  createdAt: string
 }
 
 // Initialize default config if not exists
@@ -119,10 +134,18 @@ function initializeMedia() {
   }
 }
 
+// Initialize default materials array
+function initializeMaterials() {
+  if (!fs.existsSync(MATERIALS_FILE)) {
+    fs.writeFileSync(MATERIALS_FILE, JSON.stringify([], null, 2))
+  }
+}
+
 // Ensure files exist
 initializeConfig()
 initializeMessages()
 initializeMedia()
+initializeMaterials()
 
 // Read functions
 export function getMessages(): Message[] {
@@ -149,6 +172,14 @@ export function getMedia(): MediaAsset[] {
   }
 }
 
+export function getMaterials(): Material[] {
+  try {
+    return JSON.parse(fs.readFileSync(MATERIALS_FILE, 'utf-8'))
+  } catch {
+    return []
+  }
+}
+
 // Write functions
 export function saveMessages(messages: Message[]): void {
   fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2))
@@ -160,6 +191,10 @@ export function saveConfig(config: MessageConfig): void {
 
 export function saveMedia(media: MediaAsset[]): void {
   fs.writeFileSync(MEDIA_FILE, JSON.stringify(media, null, 2))
+}
+
+export function saveMaterials(materials: Material[]): void {
+  fs.writeFileSync(MATERIALS_FILE, JSON.stringify(materials, null, 2))
 }
 
 // Helper functions
@@ -239,4 +274,39 @@ export function updateMediaAsset(
   media[index] = { ...media[index], ...updates }
   saveMedia(media)
   return media[index]
+}
+
+export function addMaterial(material: Omit<Material, 'id' | 'createdAt'>): Material {
+  const materials = getMaterials()
+  const newMaterial: Material = {
+    ...material,
+    id: Date.now().toString(),
+    createdAt: new Date().toISOString(),
+  }
+  materials.push(newMaterial)
+  saveMaterials(materials)
+  return newMaterial
+}
+
+export function updateMaterial(
+  id: string,
+  updates: Partial<Material>
+): Material | null {
+  const materials = getMaterials()
+  const index = materials.findIndex((m) => m.id === id)
+  if (index === -1) return null
+
+  materials[index] = { ...materials[index], ...updates }
+  saveMaterials(materials)
+  return materials[index]
+}
+
+export function deleteMaterial(id: string): boolean {
+  const materials = getMaterials()
+  const filtered = materials.filter((m) => m.id !== id)
+  if (filtered.length < materials.length) {
+    saveMaterials(filtered)
+    return true
+  }
+  return false
 }
