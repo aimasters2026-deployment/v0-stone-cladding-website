@@ -7,12 +7,11 @@ import Portfolio from '@/components/sections/portfolio'
 import Materials from '@/components/sections/materials'
 import Testimonials from '@/components/sections/testimonials'
 import Contact from '@/components/sections/contact'
-import Footer from '@/components/footer'
 import CursorTracker from '@/components/cursor-tracker'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] overflow-hidden">
+    <main className="bg-[#0a0a0a] overflow-hidden">
       <CursorTracker />
       <Header />
       <Hero />
@@ -23,7 +22,6 @@ export default function Home() {
       <Materials />
       <Testimonials />
       <Contact />
-      <Footer />
     </main>
   )
 }

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ConsultationProvider } from '@/components/consultation-provider'
 import ConsultationPopup from '@/components/consultation-popup'
+import Footer from '@/components/footer'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -43,9 +44,12 @@ export default function RootLayout({
       ..._spaceGrotesk.style,
       ..._inter.style
     } as React.CSSProperties}>
-      <body className="font-sans antialiased bg-[#0a0a0a] text-white">
+      <body className="font-sans antialiased bg-[#0a0a0a] text-white flex flex-col min-h-screen">
         <ConsultationProvider>
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
           <ConsultationPopup />
           {process.env.NODE_ENV === 'production' && <Analytics />}
         </ConsultationProvider>
