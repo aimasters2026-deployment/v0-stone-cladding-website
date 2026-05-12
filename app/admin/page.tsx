@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import AdminNav from '@/components/admin-nav'
-import MessageRoutingConfig from '@/components/admin/message-routing-config'
-import MediaManagement from '@/components/admin/media-management'
-import MessageHistory from '@/components/admin/message-history'
+import { MessageRoutingConfig } from '@/components/admin/message-routing-config'
+import { MediaManagement } from '@/components/admin/media-management'
+import { MessageHistory } from '@/components/admin/message-history'
 import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
 
