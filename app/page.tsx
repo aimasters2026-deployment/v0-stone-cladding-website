@@ -1,16 +1,25 @@
+import Header from '@/components/header'
+import Hero from '@/components/sections/hero'
+import Overview from '@/components/sections/overview'
+import Services from '@/components/sections/services'
+import WhyStone from '@/components/sections/why-stone'
+import Portfolio from '@/components/sections/portfolio'
+import Testimonials from '@/components/sections/testimonials'
+import Contact from '@/components/sections/contact'
+import Footer from '@/components/footer'
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            octo21stltd_project
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
-      </main>
-    </div>
-  );
+    <main className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <Overview />
+      <Services />
+      <WhyStone />
+      <Portfolio />
+      <Testimonials />
+      <Contact />
+      <Footer />
+    </main>
+  )
 }
