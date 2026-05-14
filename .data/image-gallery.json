@@ -1,0 +1,84 @@
+{
+  "id": "1",
+  "placements": [
+    {
+      "id": "1",
+      "placementKey": "header-logo",
+      "label": "Header Logo",
+      "category": "header",
+      "description": "Logo in header",
+      "isRequired": true
+    },
+    {
+      "id": "2",
+      "placementKey": "hero-background",
+      "label": "Hero Background",
+      "category": "hero",
+      "description": "Hero section background",
+      "isRequired": true,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "3",
+      "placementKey": "overview-image-1",
+      "label": "Overview Section",
+      "category": "overview",
+      "description": "Overview section image",
+      "isRequired": false
+    },
+    {
+      "id": "4",
+      "placementKey": "portfolio-1",
+      "label": "Portfolio Image 1",
+      "category": "portfolio",
+      "description": "Portfolio showcase 1",
+      "isRequired": false
+    },
+    {
+      "id": "5",
+      "placementKey": "portfolio-2",
+      "label": "Portfolio Image 2",
+      "category": "portfolio",
+      "description": "Portfolio showcase 2",
+      "isRequired": false
+    },
+    {
+      "id": "6",
+      "placementKey": "testimonial-avatar-1",
+      "label": "Testimonial Avatar 1",
+      "category": "testimonials",
+      "description": "Avatar for testimonial 1",
+      "isRequired": false,
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "7",
+      "placementKey": "testimonial-avatar-2",
+      "label": "Testimonial Avatar 2",
+      "category": "testimonials",
+      "description": "Avatar for testimonial 2",
+      "isRequired": false,
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "8",
+      "placementKey": "testimonial-avatar-3",
+      "label": "Testimonial Avatar 3",
+      "category": "testimonials",
+      "description": "Avatar for testimonial 3",
+      "isRequired": false,
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "9",
+      "placementKey": "footer-logo",
+      "label": "Footer Logo",
+      "category": "footer",
+      "description": "Logo in footer",
+      "isRequired": false
+    }
+  ],
+  "defaultCategory": "general",
+  "createdAt": "2026-05-14T14:58:38.705Z",
+  "updatedAt": "2026-05-14T14:58:38.705Z"
+}

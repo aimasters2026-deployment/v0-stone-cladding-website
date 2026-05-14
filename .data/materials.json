@@ -1,0 +1,104 @@
+[
+  {
+    "id": "1715123456789",
+    "name": "Black Granite Classic",
+    "category": "Natural Stone",
+    "description": "Premium polished black granite offering timeless elegance and superior durability for high-traffic facades.",
+    "durability": "50+ years",
+    "cost": "Premium",
+    "maintenance": "Low",
+    "applications": "Facades, Flooring, Countertops",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/engineered_facade_detail.jpg%20-%20Copy%20-%20Copy-jH7bCc3bqM5kAWesV9qFSb5Iddv423.png",
+    "features": [
+      "Weather-resistant",
+      "Anti-slip",
+      "Eco-friendly"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  },
+  {
+    "id": "1715123456790",
+    "name": "White Marble Elegance",
+    "category": "Natural Stone",
+    "description": "Luxurious white marble with distinctive veining patterns, perfect for sophisticated residential and commercial projects.",
+    "durability": "40+ years",
+    "cost": "Premium",
+    "maintenance": "Medium",
+    "applications": "Lobbies, Feature walls, Countertops",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/modern_building_rainscreen.jpg%20-%20Copy-cZoiVF0UwkzNB3iqa4HjWcLI3XYpE2.png",
+    "features": [
+      "Luxurious finish",
+      "Naturally unique",
+      "High-end appeal"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  },
+  {
+    "id": "1715123456791",
+    "name": "Sandstone Warm Tone",
+    "category": "Natural Stone",
+    "description": "Warm-toned sandstone providing natural aesthetic appeal and excellent thermal properties for sustainable buildings.",
+    "durability": "45+ years",
+    "cost": "Mid-range",
+    "maintenance": "Low",
+    "applications": "Facades, Cladding, Architectural details",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project-building-1.png-EO3SIth9pBZ33WMLgB0y2qZe5t98VW.png",
+    "features": [
+      "Natural warmth",
+      "Thermal efficient",
+      "Traditional appeal"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  },
+  {
+    "id": "1715123456792",
+    "name": "Slate Grey Contemporary",
+    "category": "Engineered Stone",
+    "description": "Modern engineered slate providing consistency, durability, and contemporary aesthetic for contemporary architectural designs.",
+    "durability": "60+ years",
+    "cost": "Premium",
+    "maintenance": "Very Low",
+    "applications": "Modern facades, Roofing, Flooring",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/engineered_facade_detail.jpg%20-%20Copy%20-%20Copy-jH7bCc3bqM5kAWesV9qFSb5Iddv423.png",
+    "features": [
+      "Engineered precision",
+      "Weather-proof",
+      "Modern design"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  },
+  {
+    "id": "1715123456793",
+    "name": "Limestone Soft Beige",
+    "category": "Natural Stone",
+    "description": "Soft beige limestone creating warm, inviting facades suitable for residential and boutique commercial properties.",
+    "durability": "35+ years",
+    "cost": "Mid-range",
+    "maintenance": "Medium",
+    "applications": "Residential facades, Feature elements",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/modern_building_rainscreen.jpg%20-%20Copy-cZoiVF0UwkzNB3iqa4HjWcLI3XYpE2.png",
+    "features": [
+      "Warm appearance",
+      "Soft texture",
+      "Classic charm"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  },
+  {
+    "id": "1715123456794",
+    "name": "Basalt Dark Premium",
+    "category": "Natural Stone",
+    "description": "Deep black basalt stone with superior strength and contemporary appeal ideal for statement facades.",
+    "durability": "70+ years",
+    "cost": "Premium",
+    "maintenance": "Low",
+    "applications": "Bold facades, Public buildings, High-traffic areas",
+    "imageUrl": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project-building-1.png-EO3SIth9pBZ33WMLgB0y2qZe5t98VW.png",
+    "features": [
+      "Extreme durability",
+      "Bold aesthetic",
+      "Anti-slip surface"
+    ],
+    "createdAt": "2024-05-08T10:00:00Z"
+  }
+]
