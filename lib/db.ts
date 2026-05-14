@@ -7,6 +7,7 @@ const CONFIG_FILE = path.join(DB_DIR, 'config.json')
 const MEDIA_FILE = path.join(DB_DIR, 'media.json')
 const MATERIALS_FILE = path.join(DB_DIR, 'materials.json')
 const CONSULTATION_CONFIG_FILE = path.join(DB_DIR, 'consultation-config.json')
+const IMAGE_GALLERY_FILE = path.join(DB_DIR, 'image-gallery.json')
 
 // Ensure data directory exists
 if (!fs.existsSync(DB_DIR)) {
@@ -50,14 +51,42 @@ export interface MessageConfig {
 
 export interface MediaAsset {
   id: string
-  type: 'hero-video' | 'hero-image' | 'portfolio-image' | 'thumbnail'
+  type: 'hero-video' | 'hero-image' | 'portfolio-image' | 'thumbnail' | 'testimonial' | 'logo' | 'section-image'
   title: string
   description: string
   filename: string
   url: string
   size: number
   uploadedAt: string
+  category: string // e.g., 'header', 'hero', 'testimonials', 'portfolio'
+  placement?: string // specific placement identifier (e.g., 'header-logo', 'hero-background')
+  altText: string // for accessibility
+  width?: number
+  height?: number
+  tags: string[]
+  isActive: boolean
   metadata?: Record<string, any>
+}
+
+export interface ImagePlacement {
+  id: string
+  placementKey: string // e.g., 'header-logo', 'hero-background'
+  label: string // display name
+  category: string // e.g., 'header', 'hero', 'testimonials'
+  description: string
+  mediaId?: string // currently assigned media asset
+  width?: number
+  height?: number
+  aspectRatio?: string // e.g., '16/9', '1/1'
+  isRequired: boolean
+}
+
+export interface ImageGalleryConfig {
+  id: string
+  placements: ImagePlacement[]
+  defaultCategory: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Material {
@@ -226,12 +255,41 @@ function initializeConsultationConfig() {
   return defaultConfig
 }
 
+// Initialize image gallery config
+function initializeImageGallery() {
+  if (fs.existsSync(IMAGE_GALLERY_FILE)) {
+    return JSON.parse(fs.readFileSync(IMAGE_GALLERY_FILE, 'utf-8'))
+  }
+
+  const defaultGallery: ImageGalleryConfig = {
+    id: '1',
+    placements: [
+      { id: '1', placementKey: 'header-logo', label: 'Header Logo', category: 'header', description: 'Logo in header', isRequired: true },
+      { id: '2', placementKey: 'hero-background', label: 'Hero Background', category: 'hero', description: 'Hero section background', isRequired: true, aspectRatio: '16/9' },
+      { id: '3', placementKey: 'overview-image-1', label: 'Overview Section', category: 'overview', description: 'Overview section image', isRequired: false },
+      { id: '4', placementKey: 'portfolio-1', label: 'Portfolio Image 1', category: 'portfolio', description: 'Portfolio showcase 1', isRequired: false },
+      { id: '5', placementKey: 'portfolio-2', label: 'Portfolio Image 2', category: 'portfolio', description: 'Portfolio showcase 2', isRequired: false },
+      { id: '6', placementKey: 'testimonial-avatar-1', label: 'Testimonial Avatar 1', category: 'testimonials', description: 'Avatar for testimonial 1', isRequired: false, aspectRatio: '1/1' },
+      { id: '7', placementKey: 'testimonial-avatar-2', label: 'Testimonial Avatar 2', category: 'testimonials', description: 'Avatar for testimonial 2', isRequired: false, aspectRatio: '1/1' },
+      { id: '8', placementKey: 'testimonial-avatar-3', label: 'Testimonial Avatar 3', category: 'testimonials', description: 'Avatar for testimonial 3', isRequired: false, aspectRatio: '1/1' },
+      { id: '9', placementKey: 'footer-logo', label: 'Footer Logo', category: 'footer', description: 'Logo in footer', isRequired: false },
+    ],
+    defaultCategory: 'general',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }
+
+  fs.writeFileSync(IMAGE_GALLERY_FILE, JSON.stringify(defaultGallery, null, 2))
+  return defaultGallery
+}
+
 // Ensure files exist
 initializeConfig()
 initializeMessages()
 initializeMedia()
 initializeMaterials()
 initializeConsultationConfig()
+initializeImageGallery()
 
 // Read functions
 export function getMessages(): Message[] {
@@ -420,4 +478,47 @@ export function updateConsultationConfig(
   }
   saveConsultationConfig(updated)
   return updated
+}
+
+export function getImageGallery(): ImageGalleryConfig {
+  try {
+    return JSON.parse(fs.readFileSync(IMAGE_GALLERY_FILE, 'utf-8'))
+  } catch {
+    return initializeImageGallery()
+  }
+}
+
+export function saveImageGallery(config: ImageGalleryConfig): void {
+  fs.writeFileSync(IMAGE_GALLERY_FILE, JSON.stringify(config, null, 2))
+}
+
+export function updateImageGallery(
+  updates: Partial<ImageGalleryConfig>
+): ImageGalleryConfig {
+  const config = getImageGallery()
+  const updated: ImageGalleryConfig = {
+    ...config,
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  }
+  saveImageGallery(updated)
+  return updated
+}
+
+export function assignMediaToPlacement(placementKey: string, mediaId: string): ImageGalleryConfig {
+  const gallery = getImageGallery()
+  const placement = gallery.placements.find(p => p.placementKey === placementKey)
+  if (placement) {
+    placement.mediaId = mediaId
+  }
+  return updateImageGallery({ placements: gallery.placements })
+}
+
+export function getMediaByPlacement(placementKey: string): MediaAsset | null {
+  const gallery = getImageGallery()
+  const placement = gallery.placements.find(p => p.placementKey === placementKey)
+  if (!placement || !placement.mediaId) return null
+  
+  const media = getMedia()
+  return media.find(m => m.id === placement.mediaId) || null
 }

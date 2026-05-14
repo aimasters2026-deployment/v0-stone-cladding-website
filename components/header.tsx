@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
+import { AdminImage } from '@/components/admin-image'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -34,11 +35,13 @@ export default function Header() {
           >
             <div className="flex items-center gap-2">
               <div className="relative h-10 w-10">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20-%20Copy-5TXvy836rjWOFMLMeBR3Mk2Vm25aFQ.png"
+                <AdminImage
+                  placementKey="header-logo"
+                  width={40}
+                  height={40}
                   alt="Octo 21st Stone Technology"
-                  fill
                   className="object-contain"
+                  fallbackUrl="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20-%20Copy-5TXvy836rjWOFMLMeBR3Mk2Vm25aFQ.png"
                 />
               </div>
               <div className="hidden sm:block">
